@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import Button from "./src/components/Button";
-import Display from "./src/components/Display";
+import React, {Component} from 'react';
+import {Text, View, StyleSheet} from 'react-native';
+import Button from './src/components/Button';
+import Display from './src/components/Display';
 
 const initialState = {
-  displayValue: "0",
+  displayValue: '0',
   displayNeedsCleaning: false,
   operation: null,
   values: [0, 0],
@@ -12,33 +12,33 @@ const initialState = {
 };
 
 export default class App extends Component {
-  state = { ...initialState }; //gera um clone do estado inicial para resetar posterioremente
+  state = {...initialState}; //gera um clone do estado inicial para resetar posterioremente
 
-  addDigitToDisplay = (n) => {
-    if (n === "." && this.displayValue.includes(".")) {
+  addDigitToDisplay = n => {
+    if (n === '.' && this.displayValue.includes('.')) {
       return;
     }
 
     const clearDisplay =
-      this.state.displayValue === "0" || this.state.displayNeedsCleaning;
-    const currentValue = clearDisplay ? "" : this.state.displayValue;
+      this.state.displayValue === '0' || this.state.displayNeedsCleaning;
+    const currentValue = clearDisplay ? '' : this.state.displayValue;
     const displayValue = currentValue + n;
-    this.setState({ displayValue, displayNeedsCleaning: false });
+    this.setState({displayValue, displayNeedsCleaning: false});
 
-    if (n != ".") {
+    if (n != '.') {
       //se o valor digitado nao foi o ponto, foi um valor valido
       const newValue = parseFloat(displayValue);
       const values = [...this.state.values]; //clona o vetor values dentro da funcao para manipular e entao alterar no estado da classe
       values[this.state.current] = newValue;
-      this.setState({ values });
+      this.setState({values});
     }
   };
 
   clearMemory = () => {
-    this.setState({ displayValue: "0" });
+    this.setState({...initialState});
   };
 
-  setOperation = (operation) => {};
+  setOperation = operation => {};
 
   render() {
     return (
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttons: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
